@@ -11,16 +11,22 @@ def main():
     fp = args.filepath
     # read and tokenize the contents
     try:
-        tokens = tokenize(read_file(fp))
+        data = read_file(fp)
     except Exception:
         print(f"coudn't open file: {fp}")
         return 1
-    # report to user
-    if tokens == None:
-        print("Non-json or defected data detected")
-        return 2
-    else:
-        print(tokens)
+    try:
+        tokens = tokenize(data)
+        # report to user
+        if tokens == None:
+            print("Non-json or defected data detected")
+            return 2
+        else:
+            print(tokens)
+    except Exception:
+        print("Something went wrong:(")
+        return 3
+    
     
     return 0
 
